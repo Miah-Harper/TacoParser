@@ -29,7 +29,7 @@ namespace LoggingKata
             var parser = new TacoParser();
 
             // Grab an IEnumerable of locations using the Select command: var locations = lines.Select(parser.Parse);
-            var locations = lines.Select(parser.Parse).ToArray();
+            var locations = lines.Select(parser.Parse).ToArray(); //LINQ method .Select
 
             // DON'T FORGET TO LOG YOUR STEPS
 
@@ -49,6 +49,9 @@ namespace LoggingKata
 
             //HINT NESTED LOOPS SECTION---------------------
             // Do a loop for your locations to grab each location as the origin (perhaps: `locA`)
+
+            DateTime startTime = DateTime.Now;  
+
             for(var i = 0; i < locations.Length; i++)
             {
                 var locA = locations[i];
@@ -61,17 +64,23 @@ namespace LoggingKata
                 {
                     var locB = locations[x];
 
-                    var corB = new GeoCoordinate() { Latitude = locB.Location.Latitude, Longitude = locB.Location.Longitude };
+                    var corB = new GeoCoordinate() 
+                    {
+                        Latitude = locB.Location.Latitude, 
+                        Longitude = locB.Location.Longitude
+                    };
 
                     if(corA.GetDistanceTo(corB) > distance)
                     {
                         distance = corA.GetDistanceTo(corB);
-                        tacoBell1 = locA;
+                        tacoBell1 = locA; //once you compare two locations you'll need to update to the first tacobell, then update the second taco bell 
                         tacoBell2 = locB;
                     }
                 }
             }
-
+            DateTime endTime = DateTime.Now;
+            TimeSpan executionTime = endTime - startTime; //TimeSpan struct represents a time interval that is the difference between two times measured in the number of seconds, in this case 
+            Console.WriteLine($"Execution time {executionTime}");
 
 
             // Create a new corA Coordinate with your locA's lat and long

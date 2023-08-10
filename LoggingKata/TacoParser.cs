@@ -22,7 +22,7 @@ namespace LoggingKata
             // If your array.Length is less than 3, something went wrong
             if (cells.Length < 3)
             {
-                
+                logger.LogError("Error, array length is less than 3.");
                 // Log that and return null
                 // Do not fail if one record parsing fails, return null
                 return null; // TODO Implement
@@ -48,11 +48,15 @@ namespace LoggingKata
             // With the name and point set correctly
 
             var point = new Point()
-            { Latitude = latitude,
+            { 
+              Latitude = latitude,
               Longitude = longitude
             };
 
-            var tacoBellInstant = new TacoBell() { Name = name, Location = point };
+            var tacoBellInstant = new TacoBell()
+            {   Name = name,
+                Location = point 
+            };
 
             // Then, return the instance of your TacoBell class
 
